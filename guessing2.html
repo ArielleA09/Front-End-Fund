@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Hogwarts House Sorting Quiz</title>
+</head>
+<body>
+
+  <div id="quiz-container">
+    <div id="question-container">
+      <h2 id="question">Question 1: What is your favorite magical creature?</h2>
+    </div>
+    <div id="answer-buttons" class="btn-container">
+      <button class="btn" onclick="selectAnswer('Gryffindor')">Hippogriff</button>
+      <button class="btn" onclick="selectAnswer('Hufflepuff')">Niffler</button>
+      <button class="btn" onclick="selectAnswer('Ravenclaw')">Thestral</button>
+      <button class="btn" onclick="selectAnswer('Slytherin')">Dragon</button>
+    </div>
+    <div id="result-container">
+      <h3 id="result"></h3>
+    </div>
+    <div id="points-container">
+      <h3>Points:</h3>
+      <p id="house-points">
+        <p>Gryffindor: <span id="gryffindor-points">0</span></p>
+        <p>Hufflepuff: <span id="hufflepuff-points">0</span></p>
+        <p>Ravenclaw: <span id="ravenclaw-points">0</span></p>
+        <p>Slytherin: <span id="slytherin-points">0</span></p>
+      </p>
+    </div>
+  </div>
+
+</body>
+</html>
+
+
+<Style>    
+   body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    
+    background-image: url(https://www.gamebyte.com/wp-content/uploads/2020/09/HARRYPOTTERRPG.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    text-align: center;
+    padding-top: 35px;
+    padding-bottom: 35px;
+  }
+  
+  #quiz-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+  
+  .btn-container {
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: darkorchid;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn:hover {
+    background-color: purple;
+  }
+  
+  #result-container {
+    margin-top: 20px;
+  }
+</Style>
+ 
+<script>
+    // const questions = [
+    //     { question: "What is the most powerful potion ingredient?", answers: { Gryffindor: 4, Hufflepuff: 1, Ravenclaw: 3, Slytherin: 2 } },
+    //     { question: "What quality best describes you?", answers: { Gryffindor: 4, Hufflepuff: 2, Ravenclaw: 3, Slytherin: 1 } },
+    //     { question: "Who would you like to turn into a toad?", answers: { Gryffindor: 3, Hufflepuff: 2, Ravenclaw: 4, Slytherin: 1 } },
+    //     { question: "Where would be your favorite place to study?", answers: { Gryffindor: 3, Hufflepuff: 2, Ravenclaw: 4, Slytherin: 1 } },
+    //     { question: "What is your favorite animal?", answers: { Gryffindor: 2, Hufflepuff: 4, Ravenclaw: 3, Slytherin: 1 } },
+    //     { question: "What is your favorite Bertie Bott's Jelly Beans flavor?", answers: { Gryffindor: 3, Hufflepuff: 2, Ravenclaw: 4, Slytherin: 1 } },
+    //     { question: "What ability would you like to have?", answers: { Gryffindor: 4, Hufflepuff: 2, Ravenclaw: 3, Slytherin: 1 } },
+    //     { question: "What quality best describes you?", answers: { Gryffindor: 4, Hufflepuff: 2, Ravenclaw: 3, Slytherin: 1 } },
+    //     { question: "What would you do if Draco Malfoy was bullying you?", answers: { Gryffindor: 4, Hufflepuff: 2, Ravenclaw: 3, Slytherin: 1 } },
+    //     { question: "What would you want to be when you grow up?", answers: { Gryffindor: 3, Hufflepuff: 4, Ravenclaw: 2, Slytherin: 1 } },
+    // ];
+
+    const questions = [
+    { 
+        question: "Queswtion 1: What is the most powerful potion ingredient?", 
+        answers: [
+        { text: "Cherries", points: { Gryffindor: 4, Hufflepuff: 1, Ravenclaw: 3, Slytherin: 2 } },
+        { text: "Mandrake Root", points: { Gryffindor: 3, Hufflepuff: 2, Ravenclaw: 4, Slytherin: 1 } },
+        { text: "Dragon Scale", points: { Gryffindor: 2, Hufflepuff: 3, Ravenclaw: 1, Slytherin: 4 } },
+        { text: "Crystals", points: { Gryffindor: 1, Hufflepuff: 4, Ravenclaw: 3, Slytherin: 2 } }
+        ]
+    },
+    { 
+        question: "Question 2: What quality best describes you?", 
+        answers: [
+        { text: "Bravery", points: { Gryffindor: 4, Hufflepuff: 1, Ravenclaw: 3, Slytherin: 2 } },
+        { text: "Loyalty", points: { Gryffindor: 3, Hufflepuff: 4, Ravenclaw: 2, Slytherin: 1 } },
+        { text: "Intellect", points: { Gryffindor: 2, Hufflepuff: 3, Ravenclaw: 4, Slytherin: 1 } },
+        { text: "Ambition", points: { Gryffindor: 1, Hufflepuff: 2, Ravenclaw: 3, Slytherin: 4 } }
+        ]
+    },
+    { 
+        question: "Question 3: What additional quality best describes you?", 
+        answers: [
+        { text: "Confident", points: { Gryffindor: 4, Hufflepuff: 1, Ravenclaw: 3, Slytherin: 2 } },
+        { text: "Creactive", points: { Gryffindor: 3, Hufflepuff: 4, Ravenclaw: 2, Slytherin: 1 } },
+        { text: "Caring", points: { Gryffindor: 2, Hufflepuff: 3, Ravenclaw: 4, Slytherin: 1 } },
+        { text: "Resourceful", points: { Gryffindor: 1, Hufflepuff: 2, Ravenclaw: 3, Slytherin: 4 } }
+        ]
+    },
+    { 
+        question: "Question 4: Which professor would you like to turn into a toad?", 
+        answers: [
+        { text: "Voldemort", points: { Gryffindor: 4, Hufflepuff: 1, Ravenclaw: 3, Slytherin: 2 } },
+        { text: "Snape", points: { Gryffindor: 3, Hufflepuff: 2, Ravenclaw: 4, Slytherin: 1 } },
+        { text: "Umbridge", points: { Gryffindor: 2, Hufflepuff: 4, Ravenclaw: 1, Slytherin: 3 } },
+        { text: "Hagrid", points: { Gryffindor: 1, Hufflepuff: 3, Ravenclaw: 3, Slytherin: 4 } }
+        ]
+    },
+    { 
+        question: "Question 5: Where would be your favorite place to study?", 
+        answers: [
+        { text: "The Room of Requirement", points: { Gryffindor: 4, Hufflepuff: 1, Ravenclaw: 3, Slytherin: 2 } },
+        { text: "Library", points: { Gryffindor: 3, Hufflepuff: 2, Ravenclaw: 4, Slytherin: 1 } },
+        { text: "Dining Room", points: { Gryffindor: 2, Hufflepuff: 4, Ravenclaw: 1, Slytherin: 3 } },
+        { text: "Forbidden Forest", points: { Gryffindor: 1, Hufflepuff: 3, Ravenclaw: 3, Slytherin: 4 } }
+        ]
+    },
+    { 
+        question: "Question 6: What is your favorite animal?", 
+        answers: [
+        { text: "Lion", points: { Gryffindor: 4, Hufflepuff: 1, Ravenclaw: 3, Slytherin: 2 } },
+        { text: "Eagle", points: { Gryffindor: 3, Hufflepuff: 2, Ravenclaw: 4, Slytherin: 1 } },
+        { text: "Unicorn", points: { Gryffindor: 2, Hufflepuff: 4, Ravenclaw: 1, Slytherin: 3 } },
+        { text: "Snake", points: { Gryffindor: 1, Hufflepuff: 3, Ravenclaw: 3, Slytherin: 4 } }
+        ]
+    },
+    { 
+        question: "Question 7: What is your favorite Bertie Bott's Jelly Beans flavor?", 
+        answers: [
+        { text: "Watermelon", points: { Gryffindor: 4, Hufflepuff: 1, Ravenclaw: 3, Slytherin: 2 } },
+        { text: "Blue Raspberry", points: { Gryffindor: 3, Hufflepuff: 2, Ravenclaw: 4, Slytherin: 1 } },
+        { text: "Cotton Candy", points: { Gryffindor: 2, Hufflepuff: 4, Ravenclaw: 1, Slytherin: 3 } },
+        { text: "Cinnamon", points: { Gryffindor: 1, Hufflepuff: 3, Ravenclaw: 3, Slytherin: 4 } }
+        ]
+    },
+    { 
+        question: "Question 8: What ability would you like to have?", 
+        answers: [
+        { text: "Super Strength", points: { Gryffindor: 4, Hufflepuff: 1, Ravenclaw: 3, Slytherin: 2 } },
+        { text: "Extreme Intelligence", points: { Gryffindor: 3, Hufflepuff: 2, Ravenclaw: 4, Slytherin: 1 } },
+        { text: "Super Hearing", points: { Gryffindor: 2, Hufflepuff: 4, Ravenclaw: 1, Slytherin: 3 } },
+        { text: "Mind Control", points: { Gryffindor: 1, Hufflepuff: 3, Ravenclaw: 3, Slytherin: 4 } }
+        ]
+    },
+    { 
+        question: "Question 9: What would you do if Draco Malfoy was bullying you?", 
+        answers: [
+        { text: "Tell Hagrid", points: { Gryffindor: 4, Hufflepuff: 1, Ravenclaw: 3, Slytherin: 2 } },
+        { text: "Make a plan for revgenge", points: { Gryffindor: 3, Hufflepuff: 2, Ravenclaw: 4, Slytherin: 1 } },
+        { text: "Let it go", points: { Gryffindor: 2, Hufflepuff: 4, Ravenclaw: 1, Slytherin: 3 } },
+        { text: "Try to be his friend to get on his good side", points: { Gryffindor: 1, Hufflepuff: 3, Ravenclaw: 3, Slytherin: 4 } }
+        ]
+    },
+    { 
+        question: "Question 10: What would you want to be when you grow up?", 
+        answers: [
+        { text: "Professional Quidditch player", points: { Gryffindor: 4, Hufflepuff: 1, Ravenclaw: 3, Slytherin: 2 } },
+        { text: "Hogwarts Professor", points: { Gryffindor: 3, Hufflepuff: 2, Ravenclaw: 4, Slytherin: 1 } },
+        { text: "Ministry of Magic Official", points: { Gryffindor: 2, Hufflepuff: 4, Ravenclaw: 1, Slytherin: 3 } },
+        { text: "Death Eater", points: { Gryffindor: 1, Hufflepuff: 3, Ravenclaw: 3, Slytherin: 4 } }
+        ]
+    },  
+    ]
+
+
+        let currentQuestion = 0;
+        let housePoints = { Gryffindor: 0, Hufflepuff: 0, Ravenclaw: 0, Slytherin: 0 };
+
+    function startQuiz() {
+        showQuestion(currentQuestion);
+    }
+
+    function showQuestion(questionIndex) {
+        const questionContainer = document.getElementById("question-container");
+        const answerButtons = document.getElementById("answer-buttons");
+
+        questionContainer.innerHTML = `<h2>${questions[questionIndex].question}</h2>`;
+
+        answerButtons.innerHTML = "";
+        for (let answer of questions[questionIndex].answers) {
+            const button = document.createElement("button");
+            button.classList.add("btn");
+            button.innerText = answer.text;
+            button.addEventListener("click", () => selectAnswer(answer.points));
+            answerButtons.appendChild(button);
+            // console.log (answer);
+        }
+
+    }
+
+    function selectAnswer(points) {
+        console.log (points);
+        for ( let house in points) {
+            // console.log (house);
+            housePoints[house]+= points[house];
+        }
+      
+
+        // Update points display
+        updatePoints();
+
+        // Move to the next question or show results
+        currentQuestion++;
+
+        if (currentQuestion < questions.length) {
+            showQuestion(currentQuestion);
+        } else {
+            showResults();
+        }
+    }
+
+    function updatePoints() {
+        for (const house of Object.keys(housePoints)) {
+            const pointsElement = document.getElementById(`${house.toLowerCase()}-points`);
+            pointsElement.innerText = housePoints[house];
+        }
+    }
+
+    function showResults() {
+        const resultContainer = document.getElementById("result-container");
+        const result = document.getElementById("result");
+
+        const winningHouse = Object.keys(housePoints).reduce((a, b) => housePoints[a] > housePoints[b] ? a : b);
+
+        result.innerText = `Congratulations! You belong to ${winningHouse}!`;
+        resultContainer.style.display = "block";
+
+        // You can customize this part to display more information about the winning house
+    }
+
+    startQuiz();
+</script>
