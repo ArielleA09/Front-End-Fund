@@ -4,11 +4,15 @@ const moviesObject = {
     "👩‍❤️‍👨🚢🥶": "Titanic",
     "🐜👨 ": "Antman",
     "🐀👨‍🍳 ": "Ratatouille",
-    "🖊️📓👩‍❤️‍👨": "The notebook",
+    "🖊️📓👩‍❤️‍👨": "The Notebook",
     "🔍🐟 ": "Finding Nemo",
     "👸📔 ": "Princess Diaries",
-    "🧜‍♀️🦀🎶": "The Little Mermaid",
-    "🦈😬": "Jaws"
+    "🧜‍♀️🦀🎶": "Little Mermaid",
+    "🦈😬": "Jaws",
+    "🧚🏽🛎️": "Tinker Bell", 
+    "🛌👸🏽": "Sleeping Beauty",
+    "🧞‍♂️👑": "Aladdin", 
+    "🥜🔨🩰": "Nutcracker", 
 
   };
   const container = document.querySelector(".container");
