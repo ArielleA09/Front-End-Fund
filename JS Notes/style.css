@@ -7,11 +7,11 @@
   font-family: 'Poppins', sans-serif;
 }
 body{
-  background: #88ABFF;
+  background: #636C3F;
 }
 ::selection{
   color: #fff;
-  background: #618cf8;
+  background: #8F8F48;
 }
 .wrapper{
   margin: 50px;
@@ -41,11 +41,11 @@ body{
 .add-box .icon{
   height: 78px;
   width: 78px;
-  color: #88ABFF;
+  color: #636C3F;
   font-size: 40px;
   border-radius: 50%;
   justify-content: center;
-  border: 2px dashed #88ABFF;
+  border: 2px dashed #636C3F;
 }
 .add-box p{
   color: #88ABFF;
@@ -187,7 +187,7 @@ body{
   font-weight: 500;
 }
 .content header i{
-  color: #8b8989;
+  color: #8b8989; #636C3F
   cursor: pointer;
   font-size: 23px;
 }
